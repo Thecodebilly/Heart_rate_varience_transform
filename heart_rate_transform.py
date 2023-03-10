@@ -19,9 +19,9 @@ for filename in list_of_files:
     #get rows needed
     data=[]
     for i, row in enumerate(your_list):
-        if i==126:
+        if i==63:
             header=row
-        if i>125 and i<178 and row != []:
+        if i>64 and i<90 and row != []:
             data.append(row)
     desired_column_names=[
         "MEAN HR",
