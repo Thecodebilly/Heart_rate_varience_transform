@@ -54,7 +54,7 @@ for filename in list_of_files:
                       for d in filtered_data]
 
     # transpose data
-    clean_data = list(map(list, zip(*filtered_data1[0:5])))
+    clean_data = list(map(list, zip(*filtered_data1[:])))
     # make dictionary with column names as keys and column data as values
     header = {row: i for i, row in enumerate(clean_data[0])}
     clean_data_dict = {}
