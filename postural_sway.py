@@ -57,23 +57,31 @@ for filename in list_of_files:
             else:
                 clean_data_dict[row].append(col[i])
 
-    output_row = [patient_id]
-    for i, row in enumerate(header_index_dict):
-        for col in clean_data_dict:
-            output_row.append(clean_data_dict[col][i])
+    reverse_header_index_dict = {v: k for k, v in header_index_dict.items()}
+
+    for col in clean_data_dict:
+        new_clean_data_dict = {}
+        for i, val in enumerate(clean_data_dict[col]):
+            new_clean_data_dict[reverse_header_index_dict[i]] = val
+        clean_data_dict[col] = new_clean_data_dict
 
     # check if output.csv exists
 
     if not os.path.exists(args.output):
-
         output_header_row = ['patient_id']
+        file_header_index_dict = header_index_dict.copy()
         for i, row in enumerate(header_index_dict):
             for col in clean_data_dict:
                 output_header_row.append(
-                    (col+'_'+row).replace(' ', '_').replace(':', ''))
+                    (col+'_'+row).replace(' ', '_').replace(':', '').replace('(', '@').replace(')', '$'))
         with open(args.output, 'w') as f:
             writer = csv.writer(f)
             writer.writerow(output_header_row)
+
+    output_row = [patient_id]
+    for i, row in enumerate(file_header_index_dict):
+        for col in clean_data_dict:
+            output_row.append(clean_data_dict[col][row])
 
     # append data to output file
     with open(args.output, 'a') as f:
