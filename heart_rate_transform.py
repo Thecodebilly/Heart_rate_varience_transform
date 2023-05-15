@@ -3,7 +3,6 @@ import csv
 import argparse
 # TAKE IN FILENAME AS AN ARGUMENT
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "foldername", help="name of folder that has files to be appended to output.csv")
@@ -42,7 +41,7 @@ for filenum, filename in enumerate(list_of_files):
         "TINN (ms)"
     ]
 
-    header = [x.strip() for x in header if x.strip() != '']
+    header = [x.strip().split('(')[0] for x in header if x.strip() != '']
     header_index_dict = {h: i for i, h in enumerate(header)}
 
     filtered_data = [d for d in data if any(
@@ -59,6 +58,7 @@ for filenum, filename in enumerate(list_of_files):
     header = {row: i for i, row in enumerate(clean_data[0])}
     clean_data_dict = {}
     for i, row in enumerate(header):
+        row = row.split('(')[0]
         for j, col in enumerate(clean_data):
             if j == 0:
                 clean_data_dict[row] = []
@@ -97,6 +97,7 @@ for filenum, filename in enumerate(list_of_files):
             writer.writerow(output_header_row)
 
     for i, row in enumerate(file_header_index_dict):
+        row = row.split('(')[0]
         for col in clean_data_dict:
             output_row.append(clean_data_dict[col][row])
     # check if output.csv exists
