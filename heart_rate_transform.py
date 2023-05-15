@@ -76,7 +76,6 @@ for filenum, filename in enumerate(list_of_files):
         clean_data_dict[col] = new_clean_data_dict
 
     output_row = [patient_id]
-
     sample6 = ["SAMPLE 6", "sample 6", "Sample 6",
                "Sample6", "sample6", "Sample 6(6)"]
     for sample in sample6:
@@ -84,6 +83,13 @@ for filenum, filename in enumerate(list_of_files):
             num = header_index_dict[sample]
             del header_index_dict[sample]
             header_index_dict["baseline 2(6)"] = num
+
+    baseline2 = ['baseline_2']
+    for baseline in baseline2:
+        if sample in list(header_index_dict.keys()):
+            num = header_index_dict[baseline]
+            del header_index_dict[baseline]
+            header_index_dict["baseline2"] = num
 
     if not os.path.exists(args.output):
         output_header_row = ['patient_id']
