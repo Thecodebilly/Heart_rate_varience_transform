@@ -82,6 +82,7 @@ for filenum, filename in enumerate(list_of_files):
     output_row = [patient_id]
     sample6 = ["SAMPLE 6", "sample 6", "Sample 6",
                "Sample6", "sample6", "Sample 6(6)"]
+
     for sample in sample6:
         if sample in list(header_index_dict.keys()):
             num = header_index_dict[sample]
@@ -90,7 +91,7 @@ for filenum, filename in enumerate(list_of_files):
 
     baseline2 = ['baseline_2', 'baseline 2']
     for baseline in baseline2:
-        if sample in list(header_index_dict.keys()):
+        if baseline in list(header_index_dict.keys()):
             num = header_index_dict[baseline]
             del header_index_dict[baseline]
             header_index_dict["baseline2"] = num
