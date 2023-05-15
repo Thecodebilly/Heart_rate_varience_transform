@@ -3,6 +3,10 @@ import csv
 import argparse
 # TAKE IN FILENAME AS AN ARGUMENT
 
+class args:
+    foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
+    output = 'output_hr.csv'
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "foldername", help="name of folder that has files to be appended to output.csv")
