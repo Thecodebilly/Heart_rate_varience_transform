@@ -4,16 +4,17 @@ import argparse
 # TAKE IN FILENAME AS AN ARGUMENT
 
 
-class args:
-    foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
-    output = 'output_hr.csv'
-
-
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "foldername", help="name of folder that has files to be appended to output.csv")
 parser.add_argument("output", help="name of file to write to")
 args = parser.parse_args()
+
+
+# class args:
+#     foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/heart rate'
+#     output = 'output_hr.csv'
+
 
 list_of_files = os.listdir(args.foldername)
 for filenum, filename in enumerate(list_of_files):
@@ -47,8 +48,9 @@ for filenum, filename in enumerate(list_of_files):
         "TINN (ms)"
     ]
 
-    header = [x.strip().split('(')[0] for x in header if x.strip() != '']
-    header_index_dict = {h: i for i, h in enumerate(header)}
+    header_start = [x.strip().split('(')[0].replace(" ", "")
+                    for x in header if x.strip() != '']
+    header_index_dict = {h: i for i, h in enumerate(header_start)}
 
     filtered_data = [d for d in data if any(
         [True if (c.lower() in d[0].lower()) else False for c in desired_column_names])]
@@ -76,7 +78,7 @@ for filenum, filename in enumerate(list_of_files):
 
     reverse_header_index_dict = {v: k for k, v in header_index_dict.items()}
     sample6 = ["SAMPLE 6", "sample 6", "Sample 6",
-               "Sample6", "sample6", "Sample 6(6)"]
+               "Sample6", "sample6", "Sample 6(6)", 'SAMPLE6']
     for col in clean_data_dict:
         new_clean_data_dict = {}
         for i, val in enumerate(clean_data_dict[col]):
@@ -104,7 +106,7 @@ for filenum, filename in enumerate(list_of_files):
             del header_index_dict[sample]
             header_index_dict["baseline2"] = num
 
-    baseline2 = ['baseline_2', 'baseline 2']
+    baseline2 = ['baseline_2', 'baseline 2', 'baseline 2(6)']
     for baseline in baseline2:
         if baseline in list(header_index_dict.keys()):
             num = header_index_dict[baseline]
