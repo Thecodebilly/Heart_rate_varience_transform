@@ -3,9 +3,9 @@ import csv
 import argparse
 # TAKE IN FILENAME AS AN ARGUMENT
 
-class args:
-    foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
-    output = 'output_hr.csv'
+# class args:
+#     foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
+#     output = 'output_hr.csv'
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -88,7 +88,7 @@ for filenum, filename in enumerate(list_of_files):
             del header_index_dict[sample]
             header_index_dict["baseline 2(6)"] = num
 
-    baseline2 = ['baseline_2']
+    baseline2 = ['baseline_2', 'baseline 2']
     for baseline in baseline2:
         if sample in list(header_index_dict.keys()):
             num = header_index_dict[baseline]
