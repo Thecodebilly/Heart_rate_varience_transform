@@ -13,6 +13,11 @@ args = parser.parse_args()
 # print foldername
 
 
+# class args:
+#     foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/Postural sway'
+#     output = 'output_ps.csv'
+
+
 list_of_files = os.listdir(args.foldername)
 for filename in list_of_files:
     # read in csv file
@@ -29,15 +34,15 @@ for filename in list_of_files:
             header = header[1:]
         if (i > 17 and i < 23) or (i > 11 and i < 17) and row != []:
             data.append(row)
-    # desired_column_names=[
-    #    "MEAN HR",
-    #    "SD HR",
-    #    "RMSSD",
-    #    "RR tri index",
-    # ]
 
-    header = [x.strip() for x in header if x.strip() != '']
-    header_index_dict = {h: i for i, h in enumerate(header)}
+    start_header = [x.strip() for x in header if x.strip() != '']
+    eyes_open = ["eyes open", "fc", "standing eyes closed"]
+
+    for i, h in enumerate(start_header):
+        if h in eyes_open:
+            start_header[i] = "standing eyes open"
+
+    header_index_dict = {h: i for i, h in enumerate(start_header)}
 
     # data = [d for d in data if any([True if (c.lower() in d[0].lower()) else False for c in desired_column_names])]
 
