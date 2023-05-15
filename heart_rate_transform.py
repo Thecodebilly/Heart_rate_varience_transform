@@ -86,7 +86,7 @@ for filenum, filename in enumerate(list_of_files):
         if sample in list(header_index_dict.keys()):
             num = header_index_dict[sample]
             del header_index_dict[sample]
-            header_index_dict["baseline 2(6)"] = num
+            header_index_dict["baseline2"] = num
 
     baseline2 = ['baseline_2', 'baseline 2']
     for baseline in baseline2:
