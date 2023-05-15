@@ -3,9 +3,11 @@ import csv
 import argparse
 # TAKE IN FILENAME AS AN ARGUMENT
 
-# class args:
-#     foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
-#     output = 'output_hr.csv'
+
+class args:
+    foldername = '/home/billyshaw/projects/eb/Heart_rate_varience_transform/input_hr'
+    output = 'output_hr.csv'
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -63,6 +65,7 @@ for filenum, filename in enumerate(list_of_files):
     clean_data_dict = {}
     for i, row in enumerate(header):
         row = row.split('(')[0]
+
         for j, col in enumerate(clean_data):
             if j == 0:
                 clean_data_dict[row] = []
@@ -72,16 +75,28 @@ for filenum, filename in enumerate(list_of_files):
     # get reverse dict of header_index_dict
 
     reverse_header_index_dict = {v: k for k, v in header_index_dict.items()}
-
+    sample6 = ["SAMPLE 6", "sample 6", "Sample 6",
+               "Sample6", "sample6", "Sample 6(6)"]
     for col in clean_data_dict:
         new_clean_data_dict = {}
         for i, val in enumerate(clean_data_dict[col]):
             new_clean_data_dict[reverse_header_index_dict[i]] = val
         clean_data_dict[col] = new_clean_data_dict
 
+    # clean_data_dict1=clean_data_dict
+
+    for col in clean_data_dict:
+        new_clean_data_dict = {}
+        for i, val in enumerate(clean_data_dict[col]):
+            if reverse_header_index_dict[i] in list(sample6):
+                new_clean_data_dict['baseline2'] = clean_data_dict[col][reverse_header_index_dict[i]]
+
+            else:
+                new_clean_data_dict[reverse_header_index_dict[i]
+                                    ] = clean_data_dict[col][reverse_header_index_dict[i]]
+        clean_data_dict[col] = new_clean_data_dict
+
     output_row = [patient_id]
-    sample6 = ["SAMPLE 6", "sample 6", "Sample 6",
-               "Sample6", "sample6", "Sample 6(6)"]
 
     for sample in sample6:
         if sample in list(header_index_dict.keys()):
