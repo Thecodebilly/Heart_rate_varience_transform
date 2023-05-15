@@ -32,7 +32,7 @@ for filename in list_of_files:
         if i == 9:
             header = [x.split('-')[1] if "-" in x else x for x in row]
             header = header[1:]
-        if (i > 17 and i < 23) or (i > 11 and i < 17) and row != []:
+        if (i > 17 and i < 24) or (i > 11 and i < 17) and row != []:
             data.append(row)
 
     start_header = [x.strip() for x in header if x.strip() != '']
